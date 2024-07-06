@@ -1,0 +1,19 @@
+.main {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background: #e6c31c;
+}
+
+.mainTitle {
+    color: #0a2ff2;
+}
+
+.cards {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 25px;
+}

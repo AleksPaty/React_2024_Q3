@@ -1,3 +1,2 @@
 cd Class-Components
 npm run lint
-exit 1
