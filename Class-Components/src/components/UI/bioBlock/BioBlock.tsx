@@ -1,4 +1,3 @@
-import { Component } from "react";
 import { Biotype } from "../../../API/responseTypes";
 import style from './BioBlock.module.css';
 
@@ -9,10 +8,9 @@ type VoiceType = {
     Korean: string,
 }
 
-class BioBlock extends Component<{isBio: boolean, data: Biotype | VoiceType}> {
-
-    createElems(data: Biotype | VoiceType) {
-        const bioProps = Object.keys(this.props.data)
+function BioBlock(isBio: boolean, data: Biotype | VoiceType) {
+    const createElems = (data: Biotype | VoiceType): JSX.Element[] => {
+        const bioProps = Object.keys(data)
 
         const bioElems = bioProps.map((val, i) => {
             const title = val.split('_').join(' ');
@@ -30,17 +28,15 @@ class BioBlock extends Component<{isBio: boolean, data: Biotype | VoiceType}> {
         return bioElems;
     }
 
-    render() {
-        return (
-            <div>
-                {
-                    this.props.isBio 
-                        ? this.createElems(this.props.data as Biotype)
-                        : this.createElems(this.props.data as VoiceType)
-                }
-            </div>
-        )
-    }
+    return (
+        <div>
+            {
+                isBio 
+                    ? createElems(data as Biotype)
+                    : createElems(data as VoiceType)
+            }
+        </div>
+    )
 }
 
 export default BioBlock;
