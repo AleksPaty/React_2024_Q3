@@ -1,6 +1,10 @@
 import { Biotype } from "../../../API/responseTypes";
 import style from './BioBlock.module.css';
 
+interface BioProps {
+    isBio: boolean;
+    data: Biotype | VoiceType
+}
 type VoiceType = {
     Chinese: string,
     English: string,
@@ -8,14 +12,14 @@ type VoiceType = {
     Korean: string,
 }
 
-function BioBlock(isBio: boolean, data: Biotype | VoiceType) {
+function BioBlock({isBio, data}: BioProps) {
     const createElems = (data: Biotype | VoiceType): JSX.Element[] => {
         const bioProps = Object.keys(data)
 
         const bioElems = bioProps.map((val, i) => {
             const title = val.split('_').join(' ');
             let value: string = data[val as keyof (typeof data)] || '-';
-            if(val === 'release_day') value = value.slice(0, 10); 
+            if(val === 'release_day') value = value.slice(0, 10);
 
             return (
                 <div key={i} className={style.infoLine}>
@@ -23,7 +27,6 @@ function BioBlock(isBio: boolean, data: Biotype | VoiceType) {
                     <p>{value}</p>
                 </div>
             )
-            
         })
         return bioElems;
     }

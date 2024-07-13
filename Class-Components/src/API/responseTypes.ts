@@ -11,8 +11,8 @@ export interface Biotype {
     real_name: string,
     birthday: string,
     constellation: string,
-    region: string,
-    affiliation: string,
+    region: string[],
+    affiliation: string[],
     special_dish: string,
     release_day: string,
 }

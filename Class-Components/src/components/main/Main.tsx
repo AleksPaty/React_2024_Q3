@@ -1,43 +1,34 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import mainStyles from './Main.module.css';
 import PostService from "../../API/PostService";
 import { CharacterShortInfo } from "../../API/responseTypes";
 import CharacterCart from "../CharacterCart/CharacterCart";
 
-class Main extends Component<{requestWord: string}> {
-    state = {
-        findData: null as CharacterShortInfo[] | null,
-    };
+function Main({requestWord}: {requestWord: string}) {
+    const [findData, setData] = useState<CharacterShortInfo[] | []>([]);
 
-    componentDidMount(): void {
-        this.getSearchData(this.props.requestWord);
-    }
-    componentDidUpdate(prevProps: {requestWord: string}): void {
-        if(prevProps.requestWord !== this.props.requestWord) {
-            this.getSearchData(this.props.requestWord);
-        }
-    }
+    useEffect(() => {
+        getSearchData(requestWord);
+    }, [requestWord])
 
-    async getSearchData(word: string) {
+    const getSearchData = async(word: string) => {
         const data = word.length > 1
             ? await PostService.findData(word)
             : await PostService.getAll()
 
-        this.setState({ findData: data });
+        setData(data!);
     }
 
-    render() {
-        const cards = this.state.findData?.map((character) => {
-            return <CharacterCart key={character.id} data={character}/>
-        })
+    const cards = findData?.map((character) => {
+        return <CharacterCart key={character.id} data={character}/>
+    })
 
-        return (
-            <main className={mainStyles.main}>
-                <h2 className={mainStyles.mainTitle}>Result</h2>
-                <div className={mainStyles.cards}>{cards}</div>
-            </main>
-        )
-    }
+    return (
+        <main className={mainStyles.main}>
+            <h2 className={mainStyles.mainTitle}>Result</h2>
+            <div className={mainStyles.cards}>{cards}</div>
+        </main>
+    )
 }
 
 export default Main;
