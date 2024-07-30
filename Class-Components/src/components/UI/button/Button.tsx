@@ -1,15 +1,16 @@
 import { PropsWithChildren } from "react";
-import styles from "./Button.module.css";
 
 interface BtnProps extends PropsWithChildren {
     type: 'button' | 'submit';
+    style: string,
+    onClick?: () => void
 }
 
-function Button({children, type}: BtnProps) {
+function Button(props: BtnProps) {
 
     return (
-        <button type={type} className={styles.button}>
-            {children}
+        <button type={props.type} className={props.style} onClick={props.onClick}>
+            {props.children}
         </button>
     )
 }

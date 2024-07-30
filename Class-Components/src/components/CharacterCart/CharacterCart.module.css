@@ -46,3 +46,10 @@
     cursor: pointer;
     flex-grow: 1;
 }
+
+.closeBtn {
+    width: 90px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #0a2ff2;
+}

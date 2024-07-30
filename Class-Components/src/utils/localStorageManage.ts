@@ -6,3 +6,7 @@ export const getLocalData = (key = 'Search'): string | null => {
 export const setLocalData = (value: string, key = 'Search'): void => {
     localStorage.setItem(key, value);
 }
+
+export const removeLocalData = (key = 'Search'): void => {
+    localStorage.removeItem(key);
+}

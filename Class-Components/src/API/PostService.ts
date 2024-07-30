@@ -6,13 +6,13 @@ export default class PostService {
             const response = await fetch(`https://gsi.fly.dev/characters?page=${page}&limit=${limit}`);
             const data = await response.json() as AllData;
 
-            return data.results;
+            return [data.results, data.total_pages];
         } catch (error) {
             throw new Error((error as Error).message);
         }
     }
 
-    static async findData(word: string) {
+    static async findData(word: string, page = 1) {
         try {
             const queryNames = [
                 'name', 'region', 'vision', 'rarity', 'weapon'
@@ -20,15 +20,15 @@ export default class PostService {
             let result;
             for (let i = 0; i < queryNames.length; i++) {
                 const query = queryNames[i];
-                const response = await fetch(`https://gsi.fly.dev/characters/search?${query}=${word}`);
+                const response = await fetch(`https://gsi.fly.dev/characters/search?${query}=${word}&page=${page}`);
                 const data = await response.json() as FindData;
 
                 if(data.total_results > 0) {
-                    result = data.results;
+                    result = data;
                     break
                 }
             }
-            return result;
+            return [result?.results, result?.total_pages];
         } catch (error) {
             throw new Error((error as Error).message);
         }

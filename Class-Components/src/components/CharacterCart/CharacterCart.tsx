@@ -1,23 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
-import { Biotype, CharacterFullInfo, CharacterShortInfo } from "../../API/responseTypes";
+import { useEffect, useState } from "react";
+import { Biotype, CharacterFullInfo } from "../../API/responseTypes";
 import style from './CharacterCart.module.css';
-import PostService from "../../API/PostService";
 import BioBlock from "../UI/bioBlock/BioBlock";
+import { validImageName } from "../../utils/validNameForImg";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Button from "../UI/button/Button";
 
-function CharacterCart({data}: {data: CharacterShortInfo}) {
-    const [character, setCharacter] = useState(data as CharacterFullInfo);
+function CharacterCart() {
+    const character = useLoaderData() as CharacterFullInfo;
+    const navigate = useNavigate()
     const [bioInfo, setBio] = useState({} as Biotype);
     const [isBio, setBioBoolean] = useState(true);
 
-    const getFullInfo = useCallback(async(id: number) => {
-        const data = await PostService.getFullInfo(id);
-        setCharacter(data);
-        setBio(postBioProps(data));
-    }, [])
-
     useEffect(() => {
-        getFullInfo(data.id);
-    }, [data.id, getFullInfo])
+        setBio(postBioProps(character));
+    }, [character])
 
     const postBioProps = (data: CharacterFullInfo): Biotype => {
         const props = {
@@ -37,8 +34,12 @@ function CharacterCart({data}: {data: CharacterShortInfo}) {
     }
 
     const imageUrlBield = (characterName: string): string => {
-        const name = characterName.slice(0, 1).toLowerCase() + characterName.slice(1);
+        const name = validImageName(characterName);
         return `https://genshin.jmp.blue/characters/${name}/icon.png`;
+    }
+
+    const closeHandle = () => {
+        navigate(-1);
     }
 
     return (
@@ -57,8 +58,8 @@ function CharacterCart({data}: {data: CharacterShortInfo}) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className={style.leftPartBody}>{data.rarity}</td>
-                            <td className={style.rightPartBody}>{data.weapon}</td>
+                            <td className={style.leftPartBody}>{character.rarity}</td>
+                            <td className={style.rightPartBody}>{character.weapon}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,6 +89,7 @@ function CharacterCart({data}: {data: CharacterShortInfo}) {
                     ? <BioBlock isBio={isBio} data={bioInfo} />
                     : <BioBlock isBio={isBio} data={character.voice_actors[0]} />
             }
+            <Button type='submit' style={style.closeBtn} onClick={closeHandle}>Close</Button>
         </div>
     )
 }

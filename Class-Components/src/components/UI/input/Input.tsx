@@ -1,9 +1,17 @@
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent } from "react";
 import styles from "./Input.module.css";
 
-function Input(props: InputHTMLAttributes<HTMLInputElement>) {
+interface InputProps {
+    type: string,
+    placeholder: string,
+    value: string,
+    onChange: (e: ChangeEvent) => void,
+    name?: string
+}
+
+function Input({inputProps}: {inputProps: InputProps}) {
     return (
-        <input {...props} className={styles.input} onChange={props.onChange}/>
+        <input {...inputProps} className={styles.input} onChange={inputProps.onChange}/>
     )
 }
 
