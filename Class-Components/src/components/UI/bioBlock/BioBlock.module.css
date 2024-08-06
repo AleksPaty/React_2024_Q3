@@ -1,0 +1,11 @@
+.infoLine {
+    display: flex;
+    align-items: center;
+    padding-left: 9px;
+    border-top: 1px solid #4C5067;
+}
+
+.bioTitle {
+    width: 42%;
+    text-align: start;
+}
