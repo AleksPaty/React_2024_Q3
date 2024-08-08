@@ -24,6 +24,7 @@
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
+    flex-grow: 1;
     justify-content: space-around;
     row-gap: 25px;
 }

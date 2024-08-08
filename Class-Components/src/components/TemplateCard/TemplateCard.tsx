@@ -19,10 +19,10 @@ export function TemplateCard({data}: {data: CharacterShortInfo}) {
     return (
         isLoad
           ? (<div className={style.card}>
-                <Link to={`detail/${data.id}`}>
+                <Link to={`detail/${data.id}${location.search}`}>
                     <h3>{data.name}</h3>
                     <div>
-                        <img 
+                        <img
                             className={style.img}
                             src={img.src} alt={`${data.id}`}
                         />

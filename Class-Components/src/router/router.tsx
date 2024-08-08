@@ -5,26 +5,29 @@ import { ErrorPage } from "../pages/ErrorPage";
 import CharacterCart from "../components/CharacterCart/CharacterCart";
 import { characterDetailLoader } from "../components/CharacterCart/loader";
 import { cardsLoader } from "../components/main/loader";
-import { ROUTES } from "./puth";
+import { ROUTES } from "./path";
 
 export const router = createBrowserRouter([
     {
-      path: ROUTES.home,
+      path: '/',
       element: <App/>,
       errorElement: <ErrorPage/>,
       children: [
         {
-            path: ROUTES.home,
-            element: <Main/>,
-            loader: cardsLoader,
-            children: [
-              {
-                path: ROUTES.detail,
-                element: <CharacterCart />,
-                loader: characterDetailLoader
-              }
-            ]
-        },
+          path: '/:pageNumber?',
+          element: <Main/>,
+          loader: cardsLoader,
+          shouldRevalidate: ({ currentUrl }) => {
+            return !currentUrl.pathname.includes('detail');
+          },
+          children: [
+            {
+              path: ROUTES.detail,
+              element: <CharacterCart />,
+              loader: characterDetailLoader
+            }
+          ]
+        }
       ]
     }
 ])
