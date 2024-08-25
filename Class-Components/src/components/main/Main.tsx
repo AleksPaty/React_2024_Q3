@@ -37,21 +37,21 @@ function Main() {
         if((e.target as HTMLElement).className === currentElem.className) navigate(-1);
     }
 
-    const cards = findData.map((character) => {
-        return <TemplateCard key={character.id} data={character}/>
-    })
+    const cards = findData 
+        ? findData.map((character) => <TemplateCard key={character.id} data={character}/>)
+        : undefined
 
     return (
         <main className={mainStyles.main}>
             <h2 className={mainStyles.mainTitle}>Result</h2>
             <div className={mainStyles.searchResult}>
                 <div className={mainStyles.cards} onClick={clickCardHandle}>
-                    { findData.length < 1 ? <SPLoader/> : cards}
+                    { state === 'loading' ? <SPLoader/> : cards ?? <span>Not found</span>}
                 </div>
                 {
                     <div ref={detailsBlock} className={mainStyles.detailsBlock}>
                         {
-                            state === 'loading'
+                            findData && state === 'loading'
                                 ? <SPLoader/>
                                 : null
                         }
