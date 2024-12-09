@@ -1,0 +1,55 @@
+.card {
+    padding: 10px 0;
+    margin: 0 10px;
+    width: 260px;
+    border: 1px solid #4C5067;
+    background: #272935;
+    color: #e6c31c;
+    overflow-x: hidden;
+}
+
+.table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid #4C5067;
+}
+
+.leftPartHead {
+    padding: 9px 9px 0;
+    border-right: 1px solid #4C5067;
+}
+.rightPartHead {
+    padding: 9px 9px 0;
+}
+
+.leftPartBody {
+    padding: 0 9px 9px;
+    border-right: 1px solid #4C5067;
+}
+.rightPartBody {
+    padding: 0 9px 9px;
+}
+
+.switchBlock {
+    display: flex;
+    height: 40px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 0 0 -40px;
+    list-style: none;
+    background: #353847;
+}
+.switchItem {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.closeBtn {
+    width: 90px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #0a2ff2;
+}

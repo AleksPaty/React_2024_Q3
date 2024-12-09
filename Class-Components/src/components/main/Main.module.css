@@ -1,0 +1,30 @@
+.main {
+    box-sizing: border-box;
+    width: 100%;
+    flex-grow: 1;
+    padding: 10px;
+    background: #e6c31c;
+}
+
+.searchResult {
+    display: flex;
+    width: 100%;
+}
+
+.mainTitle {
+    color: #0a2ff2;
+}
+
+.detailsBlock {
+    width: auto;
+    border-left: 2px solid #0a2ff2;
+}
+
+.cards {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    justify-content: space-around;
+    row-gap: 25px;
+}

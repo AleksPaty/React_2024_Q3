@@ -1,0 +1,18 @@
+.paginationWpar {
+    display: flex;
+    margin: 10px auto;
+    max-width: 650px;
+    width: 45%;
+    justify-content: center;
+}
+.pagination {
+    width: 50px;
+    margin: 0 8px;
+    padding: 8px 0;
+    color: #0a2ff2;
+}
+
+.link {
+    display: block;
+    width: 100%;
+}
